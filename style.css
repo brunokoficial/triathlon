@@ -120,4 +120,8 @@ footer strong {
     header h1 {
         font-size: 2rem;
     }
+    
+}
+a#bruno{
+    color:var(--dark-red);
 }
