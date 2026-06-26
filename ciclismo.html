@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>Corrida - Tudo Sobre a Modalidade</title>
+    <style>
+        /* Reset básico para garantir consistência entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-red: #D2122E;
+    --dark-red: #8B0000;
+
+    /* Tema escuro - style1 */
+    --bg-dark: #121212;
+    --card-dark: #1E1E1E;
+    --card-hover: #2A2A2A;
+    --text-light: #F5F5F5;
+    --text-secondary: #B0B0B0;
+    --border-color: #333;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--card-dark);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border-top: 8px solid var(--primary-red);
+    text-align: left; /* Alinhamento à esquerda para melhor leitura de textos longos */
+    margin: 40px 0;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    color: var(--primary-red);
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+header h2 {
+    font-size: 1.3rem;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+h3 {
+    color: var(--primary-red);
+    font-size: 1.8rem;
+    margin: 30px 0 15px 0;
+    border-left: 4px solid var(--primary-red);
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+/* Listas de Benefícios e Distâncias */
+.benefits-list, .distances-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.benefits-list li, .distances-list li {
+    background-color: rgba(255, 255, 255, 0.03);
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-red);
+    transition: background 0.3s ease;
+}
+
+.benefits-list li:hover, .distances-list li:hover {
+    background-color: var(--card-hover);
+}
+
+.benefits-list li strong, .distances-list li strong {
+    color: #ff6b6b;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilização da Lista Horizontal (Navegação) */
+#modalidades {
+    margin: 40px 0 20px 0;
+    text-align: center;
+}
+
+.horizontal-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+}
+
+.horizontal-list li {
+    min-width: 150px;
+}
+
+.horizontal-list li a {
+    display: block;
+    padding: 12px 20px;
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(210, 18, 46, 0.4);
+    text-align: center;
+}
+
+.horizontal-list li a:hover {
+    background-color: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6);
+}
+
+footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+footer strong {
+    color: var(--primary-red);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .horizontal-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+}
+    </style>
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>CICLISMO</h1>
+            <h2>Guia Informativo da História aos Benefícios no Triathlon</h2>
+        </header>
+
+        <main class="content-text">
+            <section>
+                <h3>O que é?</h3>
+                <p class="description">O ciclismo é a atividade física que envolve a utilização de uma bicicleta para fins de locomoção, lazer, saúde ou competição desportiva. Caracteriza-se como um desporto de resistência e velocidade que utiliza a força muscular das pernas para acionar os pedais, transmitindo energia mecânica e gerando a tração necessária para o deslocamento do veículo de duas rodas. É amplamente reconhecido como uma das formas mais eficientes e sustentáveis de mobilidade urbana e uma das modalidades desportivas mais populares do planeta.</p>
+            </section>
+
+            <section>
+                <h3>A história do ciclismo</h3>
+                <p class="description">O surgimento do ciclismo está diretamente ligado à invenção e evolução da própria bicicleta no século XIX. O primeiro protótipo documentado foi a "draisiana" (criada pelo barão alemão Karl von Drais em 1817), um veículo de madeira acionado pelo impulso dos pés diretamente no solo. O design atual da bicicleta, com sistema de tração por corrente na roda traseira e pneus de borracha, consolidou-se no final da década de 1880, tornando o transporte muito mais seguro e confortável.</p>
+                <p class="description">Com a rápida evolução do equipamento, o ciclismo desportivo desenvolveu-se intensamente na Europa. A primeira corrida oficial registada ocorreu em 1868 no Parc de Saint-Cloud, em Paris. O desporto fez parte da primeira edição dos Jogos Olímpicos da era moderna, em 1896. Nas décadas seguintes, surgiram as três grandes e mais prestigiadas competições de estrada do mundo (os chamados Grand Tours): o Tour de France (1903), o Giro d'Italia (1909) e a Vuelta a España (1935), que elevaram o ciclismo ao estatuto de fenómeno desportivo de massas e de altíssima exigência profissional.</p>
+            </section>
+
+            <section>
+                <h3>Por que praticar?</h3>
+                <p class="description">Praticar ciclismo oferece uma oportunidade única de conciliar benefícios físicos com utilidade prática diária. Além de ser uma excelente modalidade de exercício cardiovascular, a bicicleta funciona como um meio de transporte económico e ecológico, permitindo fugir ao trânsito urbano enquanto se cuida da saúde. É também uma atividade com baixo impacto inicial nas articulações dos membros inferiores, tornando-se uma opção altamente acessível para pessoas com diferentes níveis de imagem e aptidão física e que desejam explorar novos cenários e percursos ao ar livre.</p>
+            </section>
+
+            <section>
+                <h3>Benefícios da prática</h3>
+                <ul class="benefits-list">
+                    <li><strong>Redução do Impacto Articular:</strong> Ao pedalar, o peso corporal é suportado principalmente pelo selim e pelo quadro da bicicleta, o que protege os joelhos e os tornozelos de choques repetitivos contra o solo.</li>
+                    <li><strong>Aumento da Força e Resistência Muscular:</strong> Exige um trabalho muscular intenso dos membros inferiores, tonificando principalmente os quadríceps, os gémeos (panturrilhas) e os glúteos.</li>
+                    <li><strong>Saúde Cardiovascular Excecional:</strong> Estimula a oxigenação do sangue, expande a capacidade pulmonar e fortalece o músculo cardíaco, reduzindo o risco de enfartes e acidentes vasculares cerebrais.</li>
+                    <li><strong>Elevado Gasto Calórico:</strong> Ajuda na manutenção e controlo do peso de forma dinâmica, acelerando o metabolismo basal mesmo após o término do treino.</li>
+                    <li><strong>Bem-Estar Psicológico e Mental:</strong> O exercício prolongado liberta neurotransmissores ligados ao prazer e relaxamento, auxiliando de forma direta no combate ao stresse, ansiedade e depressão.</li>
+                </ul>
+            </section>
+
+            <section>
+                <h3>O ciclismo no triathlon</h3>
+                <p class="description">No triathlon, o ciclismo constitui a segunda modalidade e representa a fase mais longa e volumosa de toda a competição em termos de tempo e distância (cerca de 50% a 60% do tempo total de prova). O atleta inicia o percurso de ciclismo logo após sair da água na primeira transição (T1), precisando de encontrar rapidamente uma cadência eficiente para estabilizar os batimentos cardíacos após o esforço da natação.</p>
+                <p class="description">A distância do ciclismo varia de acordo com o estilo da prova de triathlon:</p>
+                <ul class="distances-list">
+                    <li><strong>Sprint (ou Short):</strong> 20 km de ciclismo.</li>
+                    <li><strong>Olímpico (ou Standard):</strong> 40 km de ciclismo.</li>
+                    <li><strong>Meio Ironman (Ironman 70.3):</strong> 90 km de ciclismo.</li>
+                    <li><strong>Ironman Tradicional:</strong> 180 km de ciclismo.</li>
+                </ul>
+                <p class="description">A gestão do esforço e a nutrição nesta etapa são cruciais: o ciclista deve poupar energia e hidratar-se adequadamente para conseguir realizar a transição final (T2) e correr a última parte da competição em boas condições físicas.</p>
+            </section>
+        </main>
+
+        <nav id="modalidades">
+            <ul class="horizontal-list">
+                <li><a href="index.html">Voltar ao Início</a></li>
+            </ul>
+        </nav>
+
+        <footer>
+            <p>Conteúdo adaptado por: <strong>Bruno Kutcher</strong></p>
+        </footer>
+    </div>
+</body>
+</html>

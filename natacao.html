@@ -3,8 +3,181 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="style.css">
-    <title>Natação</title>
+
+    <title>Corrida - Tudo Sobre a Modalidade</title>
+    <style>
+        /* Reset básico para garantir consistência entre navegadores */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+:root {
+    --primary-red: #D2122E;
+    --dark-red: #8B0000;
+
+    /* Tema escuro - style1 */
+    --bg-dark: #121212;
+    --card-dark: #1E1E1E;
+    --card-hover: #2A2A2A;
+    --text-light: #F5F5F5;
+    --text-secondary: #B0B0B0;
+    --border-color: #333;
+}
+
+body {
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    padding: 20px;
+}
+
+.container {
+    background-color: var(--card-dark);
+    max-width: 900px;
+    width: 100%;
+    padding: 40px;
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.6);
+    border-top: 8px solid var(--primary-red);
+    text-align: left; /* Alinhamento à esquerda para melhor leitura de textos longos */
+    margin: 40px 0;
+}
+
+header {
+    text-align: center;
+    margin-bottom: 40px;
+}
+
+header h1 {
+    font-size: 3.5rem;
+    color: var(--primary-red);
+    letter-spacing: 4px;
+    margin-bottom: 10px;
+    text-transform: uppercase;
+}
+
+header h2 {
+    font-size: 1.3rem;
+    color: #ff6b6b;
+    margin-bottom: 20px;
+    font-weight: 400;
+}
+
+h3 {
+    color: var(--primary-red);
+    font-size: 1.8rem;
+    margin: 30px 0 15px 0;
+    border-left: 4px solid var(--primary-red);
+    padding-left: 15px;
+    text-transform: uppercase;
+}
+
+.description {
+    font-size: 1.05rem;
+    line-height: 1.8;
+    margin-bottom: 20px;
+    color: var(--text-secondary);
+    text-align: justify;
+}
+
+/* Listas de Benefícios e Distâncias */
+.benefits-list, .distances-list {
+    list-style: none;
+    margin-bottom: 30px;
+}
+
+.benefits-list li, .distances-list li {
+    background-color: rgba(255, 255, 255, 0.03);
+    margin-bottom: 12px;
+    padding: 15px;
+    border-radius: 8px;
+    border-left: 3px solid var(--primary-red);
+    transition: background 0.3s ease;
+}
+
+.benefits-list li:hover, .distances-list li:hover {
+    background-color: var(--card-hover);
+}
+
+.benefits-list li strong, .distances-list li strong {
+    color: #ff6b6b;
+    display: block;
+    margin-bottom: 5px;
+}
+
+/* Estilização da Lista Horizontal (Navegação) */
+#modalidades {
+    margin: 40px 0 20px 0;
+    text-align: center;
+}
+
+.horizontal-list {
+    list-style: none;
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    padding: 0;
+}
+
+.horizontal-list li {
+    min-width: 150px;
+}
+
+.horizontal-list li a {
+    display: block;
+    padding: 12px 20px;
+    background-color: var(--primary-red);
+    color: var(--text-light);
+    text-decoration: none;
+    font-weight: bold;
+    text-transform: uppercase;
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(210, 18, 46, 0.4);
+    text-align: center;
+}
+
+.horizontal-list li a:hover {
+    background-color: var(--dark-red);
+    transform: translateY(-3px);
+    box-shadow: 0 6px 20px rgba(139, 0, 0, 0.6);
+}
+
+footer {
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+    text-align: center;
+}
+
+footer strong {
+    color: var(--primary-red);
+}
+
+/* Responsividade */
+@media (max-width: 600px) {
+    .horizontal-list {
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    header h1 {
+        font-size: 2.5rem;
+    }
+    
+    .container {
+        padding: 20px;
+    }
+}
+    </style>
 </head>
 <body>
     <div class="container">
@@ -44,7 +217,7 @@
             <section>
                 <h3>A natação no triathlon</h3>
                 <p class="description">No triathlon, a natação assume o papel de modalidade de abertura. Por ser a primeira etapa do evento, ela define o ritmo inicial da competição e o posicionamento do atleta em relação aos pelotões da prova. Diferente das competições em piscinas, a natação no triathlon geralmente ocorre em águas abertas — como mares, lagos ou rios — o que adiciona desafios climáticos complexos, como ondas, correntes, baixa visibilidade e baixas temperaturas (exigindo frequentemente o uso de roupas de neoprene).</p>
-                <p class="description">As distâncias variam conforme o formato da prova:</p>
+                <p class="description">As distâncias oficiais do nado variam conforme o formato da prova:</p>
                 <ul class="distances-list">
                     <li><strong>Sprint (ou Short):</strong> 750 metros de natação.</li>
                     <li><strong>Olímpico (ou Standard):</strong> 1,5 km de natação.</li>
