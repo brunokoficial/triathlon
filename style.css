@@ -289,7 +289,7 @@ footer a {
     height: 100%;
     object-fit: cover;
     opacity: 0;
-    transform: translateX(100%);
+    /* Removeu-se o transform inicial daqui para evitar conflitos no início do ciclo */
     animation-name: slideShow;
     animation-duration: 20s;
     animation-iteration-count: infinite;
@@ -298,25 +298,31 @@ footer a {
     backface-visibility: hidden;
 }
 
+/* Delays calculados estritamente de 5s em 5s */
 .bg-img-1 { animation-delay: 0s; }
 .bg-img-2 { animation-delay: 5s; }
 .bg-img-3 { animation-delay: 10s; }
 .bg-img-4 { animation-delay: 15s; }
 
+/* EXPLICAÇÃO DOS KEYFRAMES (Baseado em 20s total):
+   0% a 5% (1s): A imagem entra deslizando da direita e ganha opacidade.
+   5% a 25% (4s): Ela fica estática e visível na tela.
+   25% a 30% (1s): Ela desliza para a esquerda e some (enquanto a PRÓXIMA entra).
+*/
 @keyframes slideShow {
     0% {
         opacity: 0;
         transform: translateX(100%);
     }
-    10% {
+    5% {
         opacity: 1;
         transform: translateX(0);
     }
-    20% {
+    25% {
         opacity: 1;
         transform: translateX(0);
     }
-    35% {
+    30% {
         opacity: 0;
         transform: translateX(-100%);
     }
