@@ -1,4 +1,4 @@
-/* 
+* 
    ESTILO FINAL TRIATLO - STYLE1
    Design Moderno, Tema Escuro e Paleta Ironman
 */
@@ -34,6 +34,58 @@ body {
     padding: 100px 20px 40px;
 }
 
+/* ============================================================
+   SLIDESHOW DE FUNDO (CARROSSEL)
+   ============================================================ */
+.bg-slideshow {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1; /* Garante que fique atrás de tudo */
+    overflow: hidden;
+}
+
+.bg-img {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    opacity: 0;
+    animation: slideshowAnim 20s infinite;
+}
+
+.bg-overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.7); /* Overlay para legibilidade */
+    z-index: 1;
+}
+
+/* Delays para as 4 imagens */
+.bg-img-1 { animation-delay: 0s; }
+.bg-img-2 { animation-delay: 5s; }
+.bg-img-3 { animation-delay: 10s; }
+.bg-img-4 { animation-delay: 15s; }
+
+@keyframes slideshowAnim {
+    0% { opacity: 0; transform: scale(1); }
+    5% { opacity: 1; }
+    25% { opacity: 1; }
+    30% { opacity: 0; transform: scale(1.05); }
+    100% { opacity: 0; }
+}
+
+/* ============================================================
+   COMPONENTES DA PÁGINA
+   ============================================================ */
+
 /* Saudação de Boas-vindas (Topo) */
 .welcome-msg-top {
     position: absolute;
@@ -68,7 +120,7 @@ body {
     border-top: 8px solid var(--primary-red);
     box-shadow: 0 10px 30px rgba(0,0,0,.6);
     text-align: left;
-    z-index: 10;
+    z-index: 10; /* Mantém o conteúdo acima do slideshow */
 }
 
 header {
@@ -259,55 +311,31 @@ footer a {
     text-decoration: none;
 }
 
-/* Estilo Universal para Imagem de Fundo (Background) */
-.page-bg-container {
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    overflow: hidden;
-}
-
-.page-bg-image {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    filter: brightness(0.3) blur(5px);
-    transform: scale(1.1);
-    opacity: 0.6;
-}
-
 /* ============================================================
    SISTEMA DE CURTIDAS (STYLE1)
    ============================================================ */
-
-/* Container que flutua no canto inferior direito */
 .like-container {
     position: fixed;
     bottom: 25px;
     right: 25px;
-    z-index: 2000;
+    z-index: 2000; /* Acima do slideshow e do conteúdo */
     display: flex;
     align-items: center;
     gap: 12px;
-    background-color: rgba(30, 30, 30, 0.85); /* Fundo escuro translúcido */
+    background-color: rgba(30, 30, 30, 0.85);
     padding: 10px 18px;
-    border-radius: 50px; /* Formato de pílula */
+    border-radius: 50px;
     border: 1px solid var(--border-color);
-    backdrop-filter: blur(8px); /* Efeito de vidro fosco */
+    backdrop-filter: blur(8px);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     transition: all 0.3s ease;
 }
 
-/* Efeito de destaque ao passar o mouse no container */
 .like-container:hover {
     border-color: var(--primary-red);
     transform: translateY(-5px);
 }
 
-/* Estilo do Botão de Curtir (Círculo Vermelho) */
 .like-button {
     background: var(--primary-red);
     color: white;
@@ -321,28 +349,18 @@ footer a {
     justify-content: center;
     font-size: 1.1rem;
     transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-    box-shadow: 0 4px 10px rgba(210, 18, 46, 0.4);
 }
 
-/* Efeito quando o botão está desativado (já curtiu) */
 .like-button:disabled {
     background: #444;
     cursor: default;
-    box-shadow: none;
     opacity: 0.7;
 }
 
-/* Efeito de clique no botão */
-.like-button:active {
-    transform: scale(0.9);
-}
-
-/* Estilo do número que mostra a contagem */
 .like-count {
     color: var(--text-light);
     font-weight: bold;
     font-size: 1rem;
-    letter-spacing: 0.5px;
 }
 
 /* Responsividade */
@@ -350,7 +368,6 @@ footer a {
     .container { padding: 20px; }
     header h1 { font-size: 2.5rem; }
     .horizontal-list { flex-direction: column; gap: 10px; }
-    .horizontal-list li { min-width: auto; }
     .welcome-msg-top { width: 90%; top: 20px; }
-    .like-container { bottom: 15px; right: 15px; padding: 8px 15px; }
+    .like-container { bottom: 15px; right: 15px; }
 }
