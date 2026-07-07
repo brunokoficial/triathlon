@@ -13,7 +13,7 @@
         <img src="ciclismoimg.png" alt="imagem ciclismo" class="bg-img bg-img-1">
         <img src="corridaimg.png" alt="imagem corrida" class="bg-img bg-img-2">
         <img src="ntacaoimg.png" alt="imagem natacao" class="bg-img bg-img-3">
-        <img src="triathlo.png"alt="imagem triathlo" class="bg-img bg-img-4">
+        <img src="triathlo.png" alt="imagem triathlo" class="bg-img bg-img-4">
         <div class="bg-overlay"></div>
     </div>
 
@@ -40,17 +40,10 @@
             <p>Desenvolvido por: <strong> <a href="https://github.com/brunokoficial" target="_blank" id="bruno">Bruno Kutcher</a></strong></p>
         </footer>
     </div>
-                <!-- Sistema de Curtidas -->
-        <script src="likes.js"></script>
-    <script>
-        const nomeUsuario = localStorage.getItem('usuarioNome');
-        const saudacaoDiv = document.getElementById('saudacao');
 
-        if (nomeUsuario) {
-            saudacaoDiv.innerHTML = `<p>Bem-vindo, <strong>${nomeUsuario}</strong>!</p>`;
-        } else {
-            window.location.href = 'acesso.html';
-        }
-    </script>
+    <!-- Script Universal -->
+    <script src="index.js"></script>
+    <!-- Script de Curtidas -->
+    <script src="likes.js"></script>
 </body>
 </html>

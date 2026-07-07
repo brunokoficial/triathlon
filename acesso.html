@@ -37,34 +37,7 @@
         </footer>
     </div>
 
-    <script>
-        // Função principal para salvar e prosseguir
-        function salvarAcesso(event) {
-            if (event) event.preventDefault();
-            
-            const nome = document.getElementById('nome').value.trim();
-            const idade = document.getElementById('idade').value.trim();
-
-            if (nome && idade) {
-                localStorage.setItem('usuarioNome', nome);
-                localStorage.setItem('usuarioIdade', idade);
-                window.location.href = 'index.html';
-            } else {
-                alert('Por favor, preencha seu nome e idade.');
-            }
-        }
-
-        // Adiciona o ouvinte para a tecla Enter em todo o documento
-        document.addEventListener('keypress', function (e) {
-            if (e.key === 'Enter') {
-                salvarAcesso();
-            }
-        });
-
-        // Foca automaticamente no campo de nome ao carregar a página
-        window.onload = () => {
-            document.getElementById('nome').focus();
-        };
-    </script>
+    <!-- Script Universal -->
+    <script src="index.js"></script>
 </body>
 </html>
