@@ -9,9 +9,22 @@ function salvarAcesso(event) {
 
     if (inputNome && inputIdade) {
         const nome = inputNome.value.trim();
-        const idade = inputIdade.value.trim();
+        const idadeValor = inputIdade.value.trim();
 
-        if (nome && idade) {
+        if (nome && idadeValor) {
+            const idade = parseInt(idadeValor);
+
+            // Validações de idade solicitadas
+            if (idade < 1 || idade > 116) {
+                alert('idade invalida');
+                return;
+            }
+
+            if (idade < 4) {
+                alert('Você é muito jovem');
+                return;
+            }
+
             localStorage.setItem('usuarioNome', nome);
             localStorage.setItem('usuarioIdade', idade);
             window.location.href = 'index.html';
