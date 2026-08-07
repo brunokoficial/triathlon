@@ -21,12 +21,10 @@ function salvarAcesso(event) {
     }
 }
 
-// 2. SISTEMA DE INTERAÇÃO UNIFICADO (CURTIDAS & DESLIKES)
+// 2. SISTEMA DE INTERAÇÃO INTELIGENTE (ALTERNÂNCIA CURTIDAS & DESLIKES)
 function inicializarInteracao() {
-    // Não carregar na página de login
     if (window.location.pathname.includes('acesso.html')) return;
 
-    // Elementos do DOM
     const likeBtn = document.getElementById('likeBtn');
     const dislikeBtn = document.getElementById('dislikeBtn');
     const likeCount = document.getElementById('likeCount');
@@ -34,48 +32,81 @@ function inicializarInteracao() {
 
     if (!likeBtn || !dislikeBtn) return;
 
-    // Carregar dados persistentes (LocalStorage)
+    // Carregar dados persistentes
     let totalLikes = parseInt(localStorage.getItem('totalLikes')) || 0;
     let totalDislikes = parseInt(localStorage.getItem('totalDislikes')) || 0;
     
     likeCount.textContent = totalLikes;
     dislikeCount.textContent = totalDislikes;
 
-    // Verificar se já interagiu nesta sessão (SessionStorage)
-    if (sessionStorage.getItem('interagiu')) {
-        travarBotoes();
+    // Recupera a escolha feita nesta sessão ('like', 'dislike' ou null)
+    let escolhaAtual = sessionStorage.getItem('escolhaSessao');
+
+    // Função para atualizar o visual dos botões baseado na escolha
+    function atualizarVisual() {
+        if (escolhaAtual === 'like') {
+            likeBtn.style.opacity = '1';
+            likeBtn.style.filter = 'none';
+            dislikeBtn.style.opacity = '0.3';
+            dislikeBtn.style.filter = 'grayscale(1)';
+        } else if (escolhaAtual === 'dislike') {
+            dislikeBtn.style.opacity = '1';
+            dislikeBtn.style.filter = 'none';
+            likeBtn.style.opacity = '0.3';
+            likeBtn.style.filter = 'grayscale(1)';
+        } else {
+            likeBtn.style.opacity = '1';
+            dislikeBtn.style.opacity = '1';
+            likeBtn.style.filter = 'none';
+            dislikeBtn.style.filter = 'none';
+        }
     }
 
-    // Evento: Curtir
+    atualizarVisual();
+
+    // Evento: Curtir (Permite alternar se já tiver dado dislike)
     likeBtn.addEventListener('click', () => {
-        if (!sessionStorage.getItem('interagiu')) {
-            totalLikes++;
-            localStorage.setItem('totalLikes', totalLikes);
-            sessionStorage.setItem('interagiu', 'true');
-            likeCount.textContent = totalLikes;
-            travarBotoes();
-            animarBotao(likeBtn);
-        }
-    });
+        if (escolhaAtual === 'like') return;
 
-    // Evento: Descurtir
-    dislikeBtn.addEventListener('click', () => {
-        if (!sessionStorage.getItem('interagiu')) {
-            totalDislikes++;
+        // Se estava em dislike, remove o dislike anterior
+        if (escolhaAtual === 'dislike') {
+            totalDislikes = Math.max(0, totalDislikes - 1);
             localStorage.setItem('totalDislikes', totalDislikes);
-            sessionStorage.setItem('interagiu', 'true');
             dislikeCount.textContent = totalDislikes;
-            travarBotoes();
-            animarBotao(dislikeBtn);
         }
+
+        // Adiciona o like
+        totalLikes++;
+        localStorage.setItem('totalLikes', totalLikes);
+        likeCount.textContent = totalLikes;
+
+        escolhaAtual = 'like';
+        sessionStorage.setItem('escolhaSessao', 'like');
+        atualizarVisual();
+        animarBotao(likeBtn);
     });
 
-    function travarBotoes() {
-        likeBtn.disabled = true;
-        dislikeBtn.disabled = true;
-        likeBtn.classList.add('disabled');
-        dislikeBtn.classList.add('disabled');
-    }
+    // Evento: Descurtir (Permite alternar se já tiver dado like)
+    dislikeBtn.addEventListener('click', () => {
+        if (escolhaAtual === 'dislike') return;
+
+        // Se estava em like, remove o like anterior
+        if (escolhaAtual === 'like') {
+            totalLikes = Math.max(0, totalLikes - 1);
+            localStorage.setItem('totalLikes', totalLikes);
+            likeCount.textContent = totalLikes;
+        }
+
+        // Adiciona o dislike
+        totalDislikes++;
+        localStorage.setItem('totalDislikes', totalDislikes);
+        dislikeCount.textContent = totalDislikes;
+
+        escolhaAtual = 'dislike';
+        sessionStorage.setItem('escolhaSessao', 'dislike');
+        atualizarVisual();
+        animarBotao(dislikeBtn);
+    });
 
     function animarBotao(btn) {
         btn.style.transform = 'scale(1.4)';
@@ -97,16 +128,14 @@ function gerenciarSaudacao() {
     }
 }
 
-// 4. INICIALIZAÇÃO AO CARREGAR
+// 4. INICIALIZAÇÃO UNIVERSAL
 document.addEventListener('DOMContentLoaded', () => {
     gerenciarSaudacao();
     inicializarInteracao();
 
-    // Foco automático no login
     const inputNome = document.getElementById('nome');
     if (inputNome) inputNome.focus();
 
-    // Atalho tecla Enter
     document.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && document.getElementById('nome')) {
             salvarAcesso();
