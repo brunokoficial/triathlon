@@ -21,7 +21,7 @@ function salvarAcesso(event) {
     }
 }
 
-// 2. SISTEMA DE INTERAÇÃO INTELIGENTE (ALTERNÂNCIA CURTIDAS & DESLIKES)
+// 2. SISTEMA DE INTERAÇÃO (LIKE/DISLIKE COM CANCELAMENTO E TRAVA)
 function inicializarInteracao() {
     if (window.location.pathname.includes('acesso.html')) return;
 
@@ -32,7 +32,7 @@ function inicializarInteracao() {
 
     if (!likeBtn || !dislikeBtn) return;
 
-    // Carregar dados persistentes
+    // Carregar dados persistentes do LocalStorage
     let totalLikes = parseInt(localStorage.getItem('totalLikes')) || 0;
     let totalDislikes = parseInt(localStorage.getItem('totalDislikes')) || 0;
     
@@ -40,77 +40,72 @@ function inicializarInteracao() {
     dislikeCount.textContent = totalDislikes;
 
     // Recupera a escolha feita nesta sessão ('like', 'dislike' ou null)
-    let escolhaAtual = sessionStorage.getItem('escolhaSessao');
+    let escolhaSessao = sessionStorage.getItem('escolhaSessao');
 
-    // Função para atualizar o visual dos botões baseado na escolha
-    function atualizarVisual() {
-        if (escolhaAtual === 'like') {
-            likeBtn.style.opacity = '1';
-            likeBtn.style.filter = 'none';
-            dislikeBtn.style.opacity = '0.3';
-            dislikeBtn.style.filter = 'grayscale(1)';
-        } else if (escolhaAtual === 'dislike') {
-            dislikeBtn.style.opacity = '1';
-            dislikeBtn.style.filter = 'none';
-            likeBtn.style.opacity = '0.3';
-            likeBtn.style.filter = 'grayscale(1)';
-        } else {
-            likeBtn.style.opacity = '1';
-            dislikeBtn.style.opacity = '1';
-            likeBtn.style.filter = 'none';
-            dislikeBtn.style.filter = 'none';
+    // Função para atualizar o visual e estado dos botões
+    function atualizarInterface() {
+        // Reset visual
+        likeBtn.classList.remove('active', 'disabled');
+        dislikeBtn.classList.remove('active', 'disabled');
+        likeBtn.disabled = false;
+        dislikeBtn.disabled = false;
+
+        if (escolhaSessao === 'like') {
+            likeBtn.classList.add('active');
+            dislikeBtn.classList.add('disabled');
+            dislikeBtn.disabled = true; // Impede clicar no dislike enquanto like está ativo
+        } else if (escolhaSessao === 'dislike') {
+            dislikeBtn.classList.add('active');
+            likeBtn.classList.add('disabled');
+            likeBtn.disabled = true; // Impede clicar no like enquanto dislike está ativo
         }
     }
 
-    atualizarVisual();
+    atualizarInterface();
 
-    // Evento: Curtir (Permite alternar se já tiver dado dislike)
+    // Lógica para o botão de LIKE
     likeBtn.addEventListener('click', () => {
-        if (escolhaAtual === 'like') return;
-
-        // Se estava em dislike, remove o dislike anterior
-        if (escolhaAtual === 'dislike') {
-            totalDislikes = Math.max(0, totalDislikes - 1);
-            localStorage.setItem('totalDislikes', totalDislikes);
-            dislikeCount.textContent = totalDislikes;
+        if (escolhaSessao === 'like') {
+            // SEGUNDO CLIQUE: Remove a curtida (Desativa)
+            totalLikes = Math.max(0, totalLikes - 1);
+            escolhaSessao = null;
+            sessionStorage.removeItem('escolhaSessao');
+        } else {
+            // PRIMEIRO CLIQUE: Adiciona a curtida (Ativa)
+            totalLikes++;
+            escolhaSessao = 'like';
+            sessionStorage.setItem('escolhaSessao', 'like');
         }
-
-        // Adiciona o like
-        totalLikes++;
+        
         localStorage.setItem('totalLikes', totalLikes);
         likeCount.textContent = totalLikes;
-
-        escolhaAtual = 'like';
-        sessionStorage.setItem('escolhaSessao', 'like');
-        atualizarVisual();
+        atualizarInterface();
         animarBotao(likeBtn);
     });
 
-    // Evento: Descurtir (Permite alternar se já tiver dado like)
+    // Lógica para o botão de DISLIKE
     dislikeBtn.addEventListener('click', () => {
-        if (escolhaAtual === 'dislike') return;
-
-        // Se estava em like, remove o like anterior
-        if (escolhaAtual === 'like') {
-            totalLikes = Math.max(0, totalLikes - 1);
-            localStorage.setItem('totalLikes', totalLikes);
-            likeCount.textContent = totalLikes;
+        if (escolhaSessao === 'dislike') {
+            // SEGUNDO CLIQUE: Remove a descurtida (Desativa)
+            totalDislikes = Math.max(0, totalDislikes - 1);
+            escolhaSessao = null;
+            sessionStorage.removeItem('escolhaSessao');
+        } else {
+            // PRIMEIRO CLIQUE: Adiciona a descurtida (Ativa)
+            totalDislikes++;
+            escolhaSessao = 'dislike';
+            sessionStorage.setItem('escolhaSessao', 'dislike');
         }
 
-        // Adiciona o dislike
-        totalDislikes++;
         localStorage.setItem('totalDislikes', totalDislikes);
         dislikeCount.textContent = totalDislikes;
-
-        escolhaAtual = 'dislike';
-        sessionStorage.setItem('escolhaSessao', 'dislike');
-        atualizarVisual();
+        atualizarInterface();
         animarBotao(dislikeBtn);
     });
 
     function animarBotao(btn) {
         btn.style.transform = 'scale(1.4)';
-        setTimeout(() => btn.style.transform = 'scale(1)', 250);
+        setTimeout(() => btn.style.transform = 'scale(1)', 200);
     }
 }
 
