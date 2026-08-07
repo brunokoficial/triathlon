@@ -1,4 +1,9 @@
-/* CSS FINAL (estilo ironman) */
+/* 
+   ============================================================
+   ESTILO DEFINITIVO TRIATHLON - STYLE1
+   Design Moderno, Tema Escuro e Paleta Ironman
+   ============================================================
+*/
 
 /* Reset e Configurações Globais */
 * {
@@ -31,9 +36,9 @@ body {
     padding: 100px 20px 40px;
 }
 
-/* SISTEMA DE BACKGROUND UNIVERSAL */
-
-/* Container Universal */
+/* ============================================================
+   SISTEMA DE BACKGROUND (CARROSSEL & FIXO)
+   ============================================================ */
 .bg-slideshow, .page-bg-container {
     position: fixed;
     top: 0;
@@ -44,7 +49,6 @@ body {
     overflow: hidden;
 }
 
-/* Estilo Base para Imagens */
 .bg-img, .page-bg-image {
     position: absolute;
     top: 0;
@@ -52,20 +56,12 @@ body {
     width: 100%;
     height: 100%;
     object-fit: cover;
-    filter: brightness(0.6) blur(1px); 
+    filter: brightness(0.4) blur(2px); 
     transform: scale(1.05);
 }
 
-/* Exclusivo Para a Animação */
-.bg-img {
-    opacity: 0;
-    animation: slideshowAnim 20s infinite;
-}
-
-/* Exclusivo para Imagens Fixas (Páginas Internas) */
-.page-bg-image {
-    opacity: 0.6; /* Garante visibilidade constante */
-}
+.bg-img { opacity: 0; animation: slideshowAnim 20s infinite; }
+.page-bg-image { opacity: 0.6; }
 
 .bg-overlay {
     position: absolute;
@@ -77,7 +73,6 @@ body {
     z-index: 1;
 }
 
-/* Delays do Slideshow */
 .bg-img-1 { animation-delay: 0s; }
 .bg-img-2 { animation-delay: 5s; }
 .bg-img-3 { animation-delay: 10s; }
@@ -91,9 +86,11 @@ body {
     100% { opacity: 0; }
 }
 
-/* COMPONENTES DA PÁGINA */
+/* ============================================================
+   COMPONENTES DE LAYOUT
+   ============================================================ */
 
-/* Saudação de Boas-vindas (Topo) */
+/* Saudação no Topo */
 .welcome-msg-top {
     position: absolute;
     top: 30px;
@@ -107,17 +104,10 @@ body {
     z-index: 1000;
 }
 
-.welcome-msg-top p {
-    margin: 0;
-    color: var(--text-light);
-    font-size: 1.1rem;
-}
+.welcome-msg-top p { margin: 0; color: var(--text-light); font-size: 1.1rem; }
+.welcome-msg-top strong { color: var(--primary-red); }
 
-.welcome-msg-top strong {
-    color: var(--primary-red);
-}
-
-/* Container Principal */
+/* Container Principal (Card) */
 .container {
     background: var(--card-dark);
     width: 100%;
@@ -126,31 +116,14 @@ body {
     border-radius: 15px;
     border-top: 8px solid var(--primary-red);
     box-shadow: 0 10px 30px rgba(0,0,0,.6);
-    text-align: left;
     z-index: 10;
 }
 
-header {
-    text-align: center;
-    margin-bottom: 40px;
-}
+header { text-align: center; margin-bottom: 40px; }
+header h1 { color: var(--primary-red); font-size: 3.5rem; letter-spacing: 4px; text-transform: uppercase; margin-bottom: 10px; }
+header h2 { color: #ff6b6b; font-size: 1.4rem; font-weight: 400; margin-bottom: 20px; }
 
-header h1 {
-    color: var(--primary-red);
-    font-size: 3.5rem;
-    letter-spacing: 4px;
-    text-transform: uppercase;
-    margin-bottom: 10px;
-}
-
-header h2 {
-    color: #ff6b6b;
-    font-size: 1.4rem;
-    font-weight: 400;
-    margin-bottom: 20px;
-}
-
-/* Estilo Universal para Imagens de Modalidade */
+/* Imagens de Modalidade (Internas) */
 .modalidade-img-container {
     width: 100%;
     margin: 20px 0 40px 0;
@@ -163,21 +136,9 @@ header h2 {
     transition: border-color 0.3s ease;
 }
 
-.modalidade-img-container:hover {
-    border-color: var(--primary-red);
-}
-
-.modalidade-img {
-    width: 100%;
-    height: 100%;
-    object-fit: cover;
-    display: block;
-    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
-}
-
-.modalidade-img:hover {
-    transform: scale(1.08);
-}
+.modalidade-img-container:hover { border-color: var(--primary-red); }
+.modalidade-img { width: 100%; height: 100%; object-fit: cover; display: block; transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94); }
+.modalidade-img:hover { transform: scale(1.08); }
 
 /* Conteúdo de Texto */
 h3 {
@@ -194,15 +155,11 @@ h3 {
     font-size: 1.05rem;
     line-height: 1.8;
     margin-bottom: 30px;
-    text-align: center;
+    text-align: justify;
 }
 
-/* Listas de Benefícios e Detalhes */
-.benefits-list, .distances-list {
-    list-style: none;
-    margin-bottom: 30px;
-}
-
+/* Listas de Benefícios e Distâncias */
+.benefits-list, .distances-list { list-style: none; margin-bottom: 30px; }
 .benefits-list li, .distances-list li {
     background: rgba(255,255,255,.03);
     margin-bottom: 12px;
@@ -211,35 +168,13 @@ h3 {
     border-left: 3px solid var(--primary-red);
     transition: .3s;
 }
+.benefits-list li:hover, .distances-list li:hover { background: var(--card-hover); }
+.benefits-list li strong, .distances-list li strong { color: #ff6b6b; display: block; margin-bottom: 5px; }
 
-.benefits-list li:hover, .distances-list li:hover {
-    background: var(--card-hover);
-}
-
-.benefits-list li strong, .distances-list li strong {
-    color: #ff6b6b;
-    display: block;
-    margin-bottom: 5px;
-}
-
-/* Navegação e Botões */
-#modalidades {
-    text-align: center;
-    margin: 40px 0 30px;
-}
-
-.horizontal-list {
-    display: flex;
-    justify-content: center;
-    gap: 20px;
-    list-style: none;
-}
-
-.horizontal-list li {
-    flex: 1;
-    min-width: 150px;
-}
-
+/* Navegação (Botões) */
+#modalidades { text-align: center; margin: 40px 0 30px; }
+.horizontal-list { display: flex; justify-content: center; gap: 20px; list-style: none; }
+.horizontal-list li { flex: 1; min-width: 150px; }
 .horizontal-list li a {
     display: block;
     padding: 15px 25px;
@@ -253,120 +188,58 @@ h3 {
     transition: .3s;
     box-shadow: 0 4px 15px rgba(210,18,46,.4);
 }
+.horizontal-list li a:hover { background: var(--dark-red); transform: translateY(-3px); box-shadow: 0 6px 20px rgba(139,0,0,.6); }
 
-.horizontal-list li a:hover {
-    background: var(--dark-red);
-    transform: translateY(-3px);
-    box-shadow: 0 6px 20px rgba(139,0,0,.6);
-}
-
-/* Estilos de Formulário (Acesso) */
-.login-form {
-    margin: 30px 0;
-    text-align: center;
-}
-
-.input-group {
-    margin-bottom: 25px;
-    text-align: left;
-    max-width: 500px;
-    margin-left: auto;
-    margin-right: auto;
-}
-
-.input-group label {
-    display: block;
-    margin-bottom: 10px;
-    color: var(--text-secondary);
-    font-weight: bold;
-    font-size: 0.9rem;
-    text-transform: uppercase;
-}
-
+/* Formulário de Acesso */
+.login-form { margin: 30px 0; text-align: center; }
+.input-group { margin-bottom: 25px; text-align: left; max-width: 500px; margin-left: auto; margin-right: auto; }
+.input-group label { display: block; margin-bottom: 10px; color: var(--text-secondary); font-weight: bold; font-size: 0.9rem; text-transform: uppercase; }
 .input-group input {
-    width: 100%;
-    padding: 15px;
-    background-color: var(--card-hover);
-    border: 1px solid var(--border-color);
-    border-radius: 10px;
-    color: var(--text-light);
-    font-size: 1rem;
-    outline: none;
-    transition: all 0.3s;
+    width: 100%; padding: 15px; background-color: var(--card-hover); border: 1px solid var(--border-color);
+    border-radius: 10px; color: var(--text-light); font-size: 1rem; outline: none; transition: all 0.3s;
 }
+.input-group input:focus { border-color: var(--primary-red); }
 
-.input-group input:focus {
-    border-color: var(--primary-red);
-}
+/* Rodapé */
+footer { text-align: center; margin-top: 40px; padding-top: 20px; border-top: 1px solid var(--border-color); color: var(--text-secondary); font-size: .9rem; }
+footer strong { color: var(--primary-red); }
+footer a { color: var(--primary-red); text-decoration: none; }
 
-/* Footer */
-footer {
-    text-align: center;
-    margin-top: 40px;
-    padding-top: 20px;
-    border-top: 1px solid var(--border-color);
-    color: var(--text-secondary);
-    font-size: .9rem;
-}
-
-footer strong {
-    color: var(--primary-red);
-}
-
-footer a {
-    color: var(--primary-red);
-    text-decoration: none;
-}
-
-/* Sistema de Curtidas */
-.like-container {
+/* ============================================================
+   SISTEMA DE INTERAÇÃO UNIFICADO (CURTIDAS & DESLIKES)
+   ============================================================ */
+.interaction-wrapper {
     position: fixed;
-    bottom: 25px;
-    right: 25px;
+    bottom: 30px;
+    right: 30px;
     z-index: 2000;
+}
+
+.interaction-box {
     display: flex;
     align-items: center;
-    gap: 12px;
-    background-color: rgba(30, 30, 30, 0.85);
-    padding: 10px 18px;
+    background: rgba(30, 30, 30, 0.9);
+    padding: 10px 20px;
     border-radius: 50px;
     border: 1px solid var(--border-color);
-    backdrop-filter: blur(8px);
-    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.6);
+    transition: 0.3s;
 }
 
-.like-container:hover {
-    border-color: var(--primary-red);
-    transform: translateY(-5px);
-}
+.interaction-box:hover { border-color: var(--primary-red); }
+.interaction-item { display: flex; align-items: center; gap: 10px; }
+.interaction-divider { width: 1px; height: 25px; background: var(--border-color); margin: 0 15px; }
+.counter { color: var(--text-light); font-weight: bold; font-size: 1.1rem; min-width: 25px; text-align: center; }
 
-.like-button {
-    background: var(--primary-red);
-    color: white;
-    border: none;
-    width: 38px;
-    height: 38px;
-    border-radius: 50%;
-    cursor: pointer;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 1.1rem;
-    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+.btn-action {
+    background: none; border: none; font-size: 1.4rem; cursor: pointer;
+    transition: 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    display: flex; align-items: center; justify-content: center;
 }
-
-.like-button:disabled {
-    background: #444;
-    cursor: default;
-    opacity: 0.7;
-}
-
-.like-count {
-    color: var(--text-light);
-    font-weight: bold;
-    font-size: 1rem;
-}
+.btn-action:hover:not(.disabled) { transform: scale(1.2); }
+.btn-action.disabled { cursor: default; opacity: 0.3; filter: grayscale(1); }
+.btn-like:hover:not(.disabled) { filter: drop-shadow(0 0 5px var(--primary-red)); }
 
 /* Responsividade */
 @media (max-width: 600px) {
@@ -374,5 +247,5 @@ footer a {
     header h1 { font-size: 2.5rem; }
     .horizontal-list { flex-direction: column; gap: 10px; }
     .welcome-msg-top { width: 90%; top: 20px; }
-    .like-container { bottom: 15px; right: 15px; }
+    .interaction-wrapper { right: 50%; transform: translateX(50%); bottom: 20px; }
 }

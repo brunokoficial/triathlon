@@ -9,6 +9,7 @@
 </head>
 <body class="home-page">
 
+    <!-- Slideshow de Fundo -->
     <div class="bg-slideshow">
         <img src="ciclismoimg.png" alt="imagem ciclismo" class="bg-img bg-img-1">
         <img src="corridaimg.png" alt="imagem corrida" class="bg-img bg-img-2">
@@ -17,13 +18,15 @@
         <div class="bg-overlay"></div>
     </div>
 
+    <!-- Saudação no Topo -->
     <div id="saudacao" class="welcome-msg-top"></div>
 
+    <!-- Conteúdo Principal -->
     <div class="container">
         <header>
             <h1>TRIATHLON</h1>
             <h2>O que é?</h2>
-            <p class="description">O triathlon é um esporte de resistência que combina as três modalidades a seguir:</p>
+            <p class="description">O triathlon é um esporte de resistência que combina três modalidades contínuas:</p>
         </header>
 
         <main>
@@ -40,9 +43,23 @@
             <p>Desenvolvido por: <strong> <a href="https://github.com/brunokoficial" target="_blank" id="bruno">Bruno Kutcher</a></strong></p>
         </footer>
     </div>
-    <!-- Script Universal -->
+
+    <!-- SISTEMA DE INTERAÇÃO UNIFICADO (HTML) -->
+    <div class="interaction-wrapper">
+        <div class="interaction-box">
+            <div class="interaction-item">
+                <span id="likeCount" class="counter">0</span>
+                <button id="likeBtn" class="btn-action btn-like" title="Curtir">👍</button>
+            </div>
+            <div class="interaction-divider"></div>
+            <div class="interaction-item">
+                <span id="dislikeCount" class="counter">0</span>
+                <button id="dislikeBtn" class="btn-action btn-dislike" title="Descurtir">👎</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
     <script src="index.js"></script>
-    <!-- Script de Curtidas -->
-    <script src="likes.js"></script>
 </body>
 </html>

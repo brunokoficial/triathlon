@@ -1,30 +1,17 @@
+// ==========================================
 // LÓGICA UNIVERSAL TRIATHLON - INDEX.JS
+// ==========================================
 
-// 1. Função de Acesso (Login)
+// 1. SISTEMA DE ACESSO (LOGIN)
 function salvarAcesso(event) {
     if (event) event.preventDefault();
-    
     const inputNome = document.getElementById('nome');
     const inputIdade = document.getElementById('idade');
 
     if (inputNome && inputIdade) {
         const nome = inputNome.value.trim();
-        const idadeValor = inputIdade.value.trim();
-
-        if (nome && idadeValor) {
-            const idade = parseInt(idadeValor);
-
-            // Validações de idade solicitadas
-            if (idade < 1 || idade > 116) {
-                alert('idade invalida');
-                return;
-            }
-
-            if (idade < 4) {
-                alert('Você é muito jovem');
-                return;
-            }
-
+        const idade = inputIdade.value.trim();
+        if (nome && idade) {
             localStorage.setItem('usuarioNome', nome);
             localStorage.setItem('usuarioIdade', idade);
             window.location.href = 'index.html';
@@ -34,51 +21,69 @@ function salvarAcesso(event) {
     }
 }
 
-// 2. Sistema de Curtidas (Style1)
-function inicializarSistemaCurtidas() {
-    // Não inicializa curtidas na página de acesso
+// 2. SISTEMA DE INTERAÇÃO UNIFICADO (CURTIDAS & DESLIKES)
+function inicializarInteracao() {
+    // Não carregar na página de login
     if (window.location.pathname.includes('acesso.html')) return;
 
-    // Cria a estrutura do botão dinamicamente
-    const likeContainer = document.createElement('div');
-    likeContainer.className = 'like-container';
-    likeContainer.innerHTML = `
-        <span class="like-count" id="countDisplay">0</span>
-        <button class="like-button" id="likeBtn" title="Curtir esta página">👍</button>
-    `;
-    document.body.appendChild(likeContainer);
-
+    // Elementos do DOM
     const likeBtn = document.getElementById('likeBtn');
-    const countDisplay = document.getElementById('countDisplay');
+    const dislikeBtn = document.getElementById('dislikeBtn');
+    const likeCount = document.getElementById('likeCount');
+    const dislikeCount = document.getElementById('dislikeCount');
 
-    // Recupera total salvo
+    if (!likeBtn || !dislikeBtn) return;
+
+    // Carregar dados persistentes (LocalStorage)
     let totalLikes = parseInt(localStorage.getItem('totalLikes')) || 0;
-    countDisplay.textContent = totalLikes;
+    let totalDislikes = parseInt(localStorage.getItem('totalDislikes')) || 0;
+    
+    likeCount.textContent = totalLikes;
+    dislikeCount.textContent = totalDislikes;
 
-    // Verifica se já curtiu nesta sessão
-    if (sessionStorage.getItem('curtiu')) {
-        likeBtn.disabled = true;
-        likeBtn.style.opacity = '0.5';
+    // Verificar se já interagiu nesta sessão (SessionStorage)
+    if (sessionStorage.getItem('interagiu')) {
+        travarBotoes();
     }
 
-    // Evento de clique
+    // Evento: Curtir
     likeBtn.addEventListener('click', () => {
-        if (!sessionStorage.getItem('curtiu')) {
+        if (!sessionStorage.getItem('interagiu')) {
             totalLikes++;
             localStorage.setItem('totalLikes', totalLikes);
-            sessionStorage.setItem('curtiu', 'true');
-            countDisplay.textContent = totalLikes;
-            likeBtn.disabled = true;
-            likeBtn.style.opacity = '0.5';
-            
-            // Efeito visual de clique
-            likeBtn.style.transform = 'scale(1.2)';
-            setTimeout(() => likeBtn.style.transform = 'scale(1)', 200);
+            sessionStorage.setItem('interagiu', 'true');
+            likeCount.textContent = totalLikes;
+            travarBotoes();
+            animarBotao(likeBtn);
         }
     });
+
+    // Evento: Descurtir
+    dislikeBtn.addEventListener('click', () => {
+        if (!sessionStorage.getItem('interagiu')) {
+            totalDislikes++;
+            localStorage.setItem('totalDislikes', totalDislikes);
+            sessionStorage.setItem('interagiu', 'true');
+            dislikeCount.textContent = totalDislikes;
+            travarBotoes();
+            animarBotao(dislikeBtn);
+        }
+    });
+
+    function travarBotoes() {
+        likeBtn.disabled = true;
+        dislikeBtn.disabled = true;
+        likeBtn.classList.add('disabled');
+        dislikeBtn.classList.add('disabled');
+    }
+
+    function animarBotao(btn) {
+        btn.style.transform = 'scale(1.4)';
+        setTimeout(() => btn.style.transform = 'scale(1)', 250);
+    }
 }
 
-// 3. Gerenciamento de Saudação e Redirecionamento
+// 3. SAUDAÇÃO E REDIRECIONAMENTO
 function gerenciarSaudacao() {
     const nomeUsuario = localStorage.getItem('usuarioNome');
     const saudacaoDiv = document.getElementById('saudacao');
@@ -92,17 +97,16 @@ function gerenciarSaudacao() {
     }
 }
 
-// 4. Inicialização Universal
+// 4. INICIALIZAÇÃO AO CARREGAR
 document.addEventListener('DOMContentLoaded', () => {
-    // Inicializa os módulos
     gerenciarSaudacao();
-    inicializarSistemaCurtidas();
+    inicializarInteracao();
 
     // Foco automático no login
     const inputNome = document.getElementById('nome');
     if (inputNome) inputNome.focus();
 
-    // Ouvinte tecla Enter
+    // Atalho tecla Enter
     document.addEventListener('keypress', (e) => {
         if (e.key === 'Enter' && document.getElementById('nome')) {
             salvarAcesso();
